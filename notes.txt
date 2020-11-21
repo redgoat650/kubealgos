@@ -1,0 +1,24 @@
+
+
+For building raspberry pi, need armv7 arch. 
+Can use docker buildx
+https://github.com/docker/buildx
+
+docker buildx build  --platform linux/arm/v7 --tag redgoat650/kubealgos:0.0.1 .
+docker push redgoat650/kubealgos:0.0.1
+
+
+(
+    this doesn't work apparently:
+    docker buildx build --push --platform linux/arm/v7,linux/arm/v8,linux/amd64 --tag redgoat650/kubealgos:0.0.1 .
+)
+
+
+
+CERT MANAGER:
+
+helm repo add jetstack https://charts.jetstack.io && helm repo update
+helm install jetstack/cert-manager --generate-name --set installCRDs=true --namespace kube-system  --version v0.16.0
+
+kubectl apply -f .\letsencrypt\letsencrypt-staging.yaml
+kubectl apply -f .\letsencrypt\letsencrypt-prod.yaml

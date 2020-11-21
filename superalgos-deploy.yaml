@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: superalgos-deploy
+  namespace: kubealgos
+  labels:
+    app: superalgos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: superalgos
+  template:
+    metadata:
+      labels:
+        app: superalgos
+    spec:
+      containers:
+      - name: superalgos
+        image: redgoat650/kubealgos:0.0.1
